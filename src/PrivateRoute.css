@@ -1,0 +1,36 @@
+/* Tambahkan ke App.css atau file CSS lainnya */
+.fixed {
+    position: fixed;
+  }
+  
+  .inset-0 {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  
+  .bg-gray-900 {
+    background-color: rgba(0, 0, 0, 0.75);
+  }
+  
+  .bg-opacity-50 {
+    opacity: 0.5;
+  }
+  
+  .bg-white {
+    background-color: #ffffff;
+  }
+  
+  .p-6 {
+    padding: 1.5rem;
+  }
+  
+  .rounded-lg {
+    border-radius: 0.75rem;
+  }
+  
+  .shadow-lg {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  }
+  

@@ -12,22 +12,28 @@ function Login() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log('User is logged in:', user);
-        navigate('/notes'); // Redirect ke halaman /notes jika user sudah login
+        navigate('/home'); // Redirect ke halaman /home jika user sudah login
       }
     });
 
     return () => unsubscribe(); // Cleanup subscription saat komponen unmount
   }, [auth, navigate]);
 
-  const handleLogin = () => {
-    signInWithGoogle()
-      .then((result) => {
-        console.log('Login successful:', result.user);
-        navigate('/notes'); // Redirect ke halaman /notes setelah login berhasil
-      })
-      .catch((error) => {
-        console.error('Error during login:', error);
+  const handleLogin = async () => {
+    try {
+      const result = await signInWithGoogle();
+      console.log('Login successful:', result.user);
+      
+      // Tunggu sampai Firebase state benar-benar diperbarui
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          console.log('User logged in after Google sign-in:', user);
+          navigate('/home'); // Redirect ke halaman /home setelah Firebase mengenali user
+        }
       });
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
   };
 
   return (

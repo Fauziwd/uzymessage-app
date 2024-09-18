@@ -5,6 +5,8 @@ import IndexAuth from './auth/IndexAuth';
 import Login from './auth/Login';
 import Messages from './Messages';
 import Notes from './Notes';
+import HomePage from './HomePage';
+import ProfilePage from './menu/ProfilePage';
 import './App.css'; // Pastikan file CSS diimpor
 
 function App() {
@@ -44,6 +46,8 @@ function App() {
         <Route path="/" element={<IndexAuth />} />
         <Route path="/login" element={<Login />} />
         <Route path="/messages" element={<Messages />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route
           path="/notes"
           element={user ? <Notes /> : <Navigate to="/login" replace />}
