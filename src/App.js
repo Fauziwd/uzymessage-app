@@ -1,24 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { auth } from './firebase'; // Pastikan auth diimpor dari firebase.js
+import IndexAuth from './auth/IndexAuth';
+import Login from './auth/Login';
+import Messages from './Messages';
+import Notes from './Notes';
+import './App.css'; // Pastikan file CSS diimpor
 
 function App() {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [alert, setAlert] = useState('');
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+      setLoading(false);
+      console.log('User state updated:', user);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="loader-container">
+        <div className="loader">
+          <span className="loader-text">tunggu..</span>
+          <span className="load"></span>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      {alert && (
+        <div className="alert bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          {alert}
+        </div>
+      )}
+      <Routes>
+        <Route path="/" element={<IndexAuth />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/messages" element={<Messages />} />
+        <Route
+          path="/notes"
+          element={user ? <Notes /> : <Navigate to="/login" replace />}
+        />
+      </Routes>
+    </Router>
   );
 }
 
