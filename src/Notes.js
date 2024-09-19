@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore, collection, doc, setDoc, getDocs, serverTimestamp } from 'firebase/firestore';
+import Bottom from './Side/Bottom';
 
 function Notes() {
   const [formData, setFormData] = useState({
@@ -55,7 +56,7 @@ function Notes() {
     try {
       if (user) {
         const userDoc = doc(firestore, 'users', user.uid, 'notes', formData.nomor);
-        
+
         // Tambahkan field submittedAt dengan serverTimestamp
         await setDoc(userDoc, {
           ...formData,
@@ -224,6 +225,7 @@ function Notes() {
           </div>
         </div>
       )}
+      <Bottom />
     </div>
   );
 }

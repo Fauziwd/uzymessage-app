@@ -1,25 +1,33 @@
 import React, { useState } from 'react';
-import { FaSearch, FaHome, FaBell, FaUser } from 'react-icons/fa';
-import { FiHeart } from 'react-icons/fi';
+import { FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom'; // Menggunakan Link dari react-router-dom
-
+import Bottom from './Side/Bottom';
 
 function HomePage() {
 
     const [selectedCategory, setSelectedCategory] = useState(null);
 
-    const categories = ['Spill', 'Notes', 'Messages', 'Toys'];
+    const categories = ['Market', 'Notes', 'Messages', 'Toys'];
     const categoryImages = {
-        Spill: 'https://via.placeholder.com/50?text=Market',
-        Notes: 'https://via.placeholder.com/50?text=Notes',
-        Messages: 'https://via.placeholder.com/50?text=Messages',
-        Toys: 'https://via.placeholder.com/50?text=Donate',
+        Market: './image/market.jpeg',
+        Notes: './image/notes.png',
+        Messages: './image/messages.png',
+        Donate: './image/donate.png',
     };
 
     const handleCategoryClick = (category) => {
         setSelectedCategory(category); // Set category yang dipilih
     };
 
+    // Daftar gambar untuk produk populer
+    const popularProducts = [
+        { id: 1, name: 'Sepatu Lokal', imgUrl: './image/sepatu.jpeg' },
+        { id: 2, name: 'Keyboard Wireless', imgUrl: './image/keyboard.jpeg' },
+        { id: 3, name: 'Monitor', imgUrl: './image/monitor.jpeg' },
+        { id: 4, name: 'Dress Well', imgUrl: './image/fashion.jpeg' },
+        { id: 5, name: 'Kosmetik', imgUrl: './image/kosmetik.jpeg' },
+        { id: 6, name: 'Tas Ransel', imgUrl: './image/tas.jpeg' },
+    ];
 
     return (
         <div className="min-h-screen bg-gray-200 flex flex-col">
@@ -45,19 +53,18 @@ function HomePage() {
                     <h2 className="text-xl font-semibold mb-2">Categories</h2>
                     <div className="grid grid-cols-4 gap-4">
                         {['Market', 'Notes', 'Messages', 'Donate'].map((category, index) => (
-                           <Link to={`/${category.toLowerCase()}`} key={index}>
-                           <div
-                               className={`flex flex-col items-center bg-white rounded-lg shadow p-4 ${category.toLowerCase()}-category`} // ClassName unik
-                           >
-                               <img
-                                   src={categoryImages[category]} // Gambar berbeda untuk setiap kategori
-                                   alt={category}
-                                   className={`w-12 h-12 ${category.toLowerCase()}-image`} // ClassName unik untuk setiap gambar
-                               />
-                               <p className="text-sm mt-2">{category}</p>
-                           </div>
-                       </Link>
-                       
+                            <Link to={`/${category.toLowerCase()}`} key={index}>
+                                <div
+                                    className={`flex flex-col items-center bg-white rounded-lg shadow p-4 ${category.toLowerCase()}-category`} // ClassName unik
+                                >
+                                    <img
+                                        src={categoryImages[category]} // Gambar berbeda untuk setiap kategori
+                                        alt={category}
+                                        className={`w-full h-full ${category.toLowerCase()}-image`} // ClassName unik untuk setiap gambar
+                                    />
+                                    <p className="text-sm mt-2">{category}</p>
+                                </div>
+                            </Link>
                         ))}
                     </div>
                 </section>
@@ -66,17 +73,15 @@ function HomePage() {
                 <section className="mb-4">
                     <h2 className="text-xl font-semibold mb-2">Popular Products</h2>
                     <div className="grid grid-cols-2 gap-4">
-                        {Array.from({ length: 6 }).map((_, index) => (
-                            <Link to={`/product/${index}`} key={index}> {/* Menggunakan Link */}
-                                <div
-                                    className="bg-white rounded-lg shadow-md p-4 flex flex-col items-center"
-                                >
+                        {popularProducts.map((product) => (
+                            <Link to={`/product/${product.id}`} key={product.id}>
+                                <div className="bg-white rounded-lg shadow-md p-4 flex flex-col items-center">
                                     <img
-                                        src="https://via.placeholder.com/100"
-                                        alt="Product"
-                                        className="w-full rounded-lg"
+                                        src={product.imgUrl}
+                                        alt={product.name}
+                                        className="w-full h-32 object-cover rounded-lg" // Mengatur tinggi gambar seragam
                                     />
-                                    <p className="text-sm mt-2 text-center">Product Name</p>
+                                    <p className="text-sm mt-2 text-center">{product.name}</p>
                                 </div>
                             </Link>
                         ))}
@@ -85,35 +90,7 @@ function HomePage() {
             </main>
 
             {/* Bottom Navigation */}
-            <nav className="bg-white dark:bg-gray-800 p-4 shadow-lg fixed bottom-0 w-full">
-                <div className="flex justify-between">
-                    <Link to="/home"> {/* Link untuk Home */}
-                        <button className="flex flex-col items-center text-gray-600 hover:text-blue-500">
-                            <FaHome className="text-xl" />
-                            <span className="text-xs">Home</span>
-                        </button>
-                    </Link>
-                    <Link to="/favorites"> {/* Link untuk Favorites */}
-                        <button className="flex flex-col items-center text-gray-600 hover:text-blue-500">
-                            <FiHeart className="text-xl" />
-                            <span className="text-xs">Favorites</span>
-                        </button>
-                    </Link>
-                    <Link to="/notifications"> {/* Link untuk Notifications */}
-                        <button className="flex flex-col items-center text-gray-600 hover:text-blue-500">
-                            <FaBell className="text-xl" />
-                            <span className="text-xs">Notifications</span>
-                        </button>
-                    </Link>
-                    <Link to="/profile"> {/* Link untuk Profile */}
-                        <button className="flex flex-col items-center text-gray-600 hover:text-blue-500">
-                            <FaUser className="text-xl" />
-                            <span className="text-xs">Profile</span>
-                        </button>
-                    </Link>
-                </div>
-            </nav>
-
+            <Bottom />
         </div>
     );
 }

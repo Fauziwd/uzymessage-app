@@ -1,0 +1,9 @@
+{
+    "products": [
+      { "id": 1, "name": "Nike Shoes", "price": "$12.00", "category": "Footwear", "image": "url", "isNew": true },
+      { "id": 2, "name": "Chair", "price": "$10.00", "category": "Furniture", "image": "url", "isNew": false },
+      { "id": 3, "name": "Sports Shoes", "price": "$100.00", "category": "Footwear", "image": "url", "isNew": false },
+      { "id": 4, "name": "Watch", "price": "$50.00", "category": "Accessories", "image": "url", "isNew": false }
+    ]
+  }
+  

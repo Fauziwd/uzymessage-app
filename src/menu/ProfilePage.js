@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getAuth, signOut } from 'firebase/auth'; // Firebase Authentication
 import { useNavigate } from 'react-router-dom'; // Untuk navigasi setelah logout
+import Bottom from '../Side/Bottom';
 
 function ProfilePage() {
     const [user, setUser] = useState(null); // Menyimpan data pengguna
@@ -32,11 +33,11 @@ function ProfilePage() {
     };
 
     return (
-        <div className="min-h-screen bg-blue-100 flex flex-col items-center p-4">
-            <div className="bg-white w-full max-w-md rounded-xl shadow-lg p-6">
+        <div className="min-h-screen bg-blue-100 flex flex-col justify-center items-center p-5">
+            <div className="bg-white h-full max-h-md w-full max-w-md rounded-lg shadow-lg p-5">
                 <div className="flex flex-col items-center">
                     {/* Foto profil */}
-                    <div className="relative w-24 h-24 rounded-full overflow-hidden mb-4">
+                    <div className="relative shadow-xl w-24 h-24 rounded-full overflow-hidden mb-4">
                         <img
                             src={user?.photoURL || 'https://via.placeholder.com/150'} // Menampilkan foto pengguna jika ada
                             alt="Profile"
@@ -83,6 +84,7 @@ function ProfilePage() {
                     </button>
                 </div>
             </div>
+            <Bottom />
         </div>
     );
 }

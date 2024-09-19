@@ -7,6 +7,8 @@ import Messages from './Messages';
 import Notes from './Notes';
 import HomePage from './HomePage';
 import ProfilePage from './menu/ProfilePage';
+import Market from './menu/Market';
+import Donate from './menu/Donate';
 import './App.css'; // Pastikan file CSS diimpor
 
 function App() {
@@ -48,6 +50,8 @@ function App() {
         <Route path="/messages" element={<Messages />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/market" element={<Market />} />
+        <Route path="/donate" element={<Donate />} />
         <Route
           path="/notes"
           element={user ? <Notes /> : <Navigate to="/login" replace />}
