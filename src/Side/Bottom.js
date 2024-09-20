@@ -14,13 +14,13 @@ function Bottom() {
   };
 
   return (
-    <div className="fixed bottom-0 w-full bg-black p-7 rounded-t-xl shadow-lg">
+    <div className="fixed bottom-0 w-full bg-black/40 backdrop-blur-lg p-7 rounded-t-xl shadow-lg">
       <div className="flex justify-around items-center relative">
         {[
           { name: 'home', icon: <FaHome />, link: '/home' },
           { name: 'favorites', icon: <FaShoppingCart />, link:'/market'  },
           { name: 'plus', icon: <FaPlus />, link: '/notes' },
-          { name: 'notifications', icon: <MdOutlineStickyNote2 />},
+          { name: 'notifications', icon: <MdOutlineStickyNote2 />, link:'/messages'},
           { name: 'profile', icon: <FaRegUser />, link: '/profile' },
         ].map((item, index) => (
           <Link
@@ -32,14 +32,14 @@ function Bottom() {
             {/* Highlight Background untuk yang aktif */}
             {active === item.link && (
               <div className="absolute -top-2 transform -translate-y-6">
-                <div className="w-11 h-16 bg-red-500 rounded-full blur-md opacity-40 transition-transform duration-300 ease-in-out"></div>
+                <div className="w-11 h-16 bg-red-500 rounded-full blur-lg opacity-50 transition-transform duration-300 ease-in-out"></div>
               </div>
             )}
 
             {/* Icon */}
             <div
               className={`text-2xl ${
-                active === item.link ? 'text-red-500' : 'text-gray-500'
+                active === item.link ? 'text-red-500' : 'text-gray-100'
               } transition-all duration-300 ease-in-out`}
             >
               {item.icon}

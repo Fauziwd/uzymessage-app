@@ -34,17 +34,24 @@ function HomePage() {
             {/* Header */}
             <header className="bg-white dark:bg-gray-800 p-4 fixed top-0 shadow-xl w-full">
                 <div className="flex justify-between items-center">
-                    <div className="text-gray-800 text-xl font-semibold">Welcome</div>
+                    {/* Ganti teks "Welcome" dengan gambar */}
+                    <img
+                        src="./image/logo.png"
+                        alt="Logo or Welcome Image"
+                        className="h-12 w-24 items-center" // Sesuaikan ukuran gambar
+                    />
+
                     <div className="relative w-2/3">
                         <input
                             type="text"
                             placeholder="Search"
                             className="w-full py-2 px-4 bg-gray-200 rounded-full focus:outline-none"
                         />
-                        <FaSearch className="absolute top-2 right-4 text-gray-500" />
+                        <FaSearch className="absolute top-3 right-4 text-gray-500" />
                     </div>
                 </div>
             </header>
+
 
             {/* Main Content */}
             <main className="flex-grow p-4 mt-20 mb-16">
@@ -54,13 +61,11 @@ function HomePage() {
                     <div className="grid grid-cols-4 gap-4">
                         {['Market', 'Notes', 'Messages', 'Donate'].map((category, index) => (
                             <Link to={`/${category.toLowerCase()}`} key={index}>
-                                <div
-                                    className={`flex flex-col items-center bg-white rounded-lg shadow p-4 ${category.toLowerCase()}-category`} // ClassName unik
-                                >
+                                <div className="flex flex-col items-center bg-white rounded-lg shadow p-4 h-28">
                                     <img
-                                        src={categoryImages[category]} // Gambar berbeda untuk setiap kategori
+                                        src={categoryImages[category]}
                                         alt={category}
-                                        className={`w-full h-full ${category.toLowerCase()}-image`} // ClassName unik untuk setiap gambar
+                                        className="w-full h-24 object-contain rounded-lg" // object-contain memastikan gambar tidak terpotong
                                     />
                                     <p className="text-sm mt-2">{category}</p>
                                 </div>
