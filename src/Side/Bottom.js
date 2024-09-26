@@ -14,7 +14,7 @@ function Bottom() {
   };
 
   return (
-    <div className="fixed bottom-0 w-full bg-black/40 backdrop-blur-lg p-7 rounded-t-xl shadow-lg">
+    <div className="fixed bottom-0 w-full bg-black/20 backdrop-blur-lg p-7 rounded-t-xl shadow-lg">
       <div className="flex justify-around items-center relative">
         {[
           { name: 'home', icon: <FaHome />, link: '/home' },

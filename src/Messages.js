@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
-import { AiOutlineFileExclamation } from 'react-icons/ai';
-import './Messages.css'; // Tambahkan CSS untuk animasi flip
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 import Bottom from './Side/Bottom';
+import './Messages.css'; // Import CSS untuk modal dan kalender
 
 function Messages() {
   const [notesData, setNotesData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [flippedCard, setFlippedCard] = useState(null); // State untuk melacak kartu yang sedang dibalik
-  const [selectedNote, setSelectedNote] = useState(null); // State untuk melacak note yang dipilih
-  const [modalActive, setModalActive] = useState(false); // State untuk melacak modal
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [notesByDate, setNotesByDate] = useState({});
+  const [loginDate, setLoginDate] = useState(null); // Tanggal login pertama
+  const [modalActive, setModalActive] = useState(false); // State untuk modal
+  const [activeNoteId, setActiveNoteId] = useState(null); // State untuk menyimpan nomor resi yang diklik
 
   useEffect(() => {
     const auth = getAuth();
@@ -31,7 +34,22 @@ function Messages() {
               ...doc.data(),
               submittedAt: doc.data().submittedAt ? doc.data().submittedAt.toDate() : null,
             }));
+
+            // Membuat object notes berdasarkan tanggal
+            const notesByDateObj = notesList.reduce((acc, note) => {
+              const dateStr = note.submittedAt.toDateString();
+              if (!acc[dateStr]) {
+                acc[dateStr] = [];
+              }
+              acc[dateStr].push(note);
+              return acc;
+            }, {});
+
             setNotesData(notesList);
+            setNotesByDate(notesByDateObj);
+
+            // Simpan tanggal login pertama (misal diambil dari user profile atau firestore)
+            setLoginDate(new Date('2023-01-01')); // contoh hardcoded, ganti dengan data dari Firestore
           }
         } catch (error) {
           setError('Error fetching notes.');
@@ -47,112 +65,125 @@ function Messages() {
     return () => unsubscribe();
   }, []);
 
-  const handleFlip = (note) => {
-    setSelectedNote(note); // Set note yang diklik
-    setModalActive(true); // Aktifkan modal
+  const handleDateClick = (date) => {
+    setSelectedDate(date);
+    setModalActive(true); // Aktifkan modal ketika tanggal diklik
+    setActiveNoteId(null); // Reset state saat tanggal baru dipilih
   };
 
   const closeModal = () => {
     setModalActive(false); // Tutup modal
   };
 
-  const formatTime = (submittedAt) => {
-    if (!submittedAt) return "-";
-    const oneDay = 24 * 60 * 60 * 1000;
-    const now = new Date();
-    const timeOptions = { hour: '2-digit', minute: '2-digit' };
-    const timeString = submittedAt.toLocaleTimeString([], timeOptions);
-
-    // Cek jika sudah lebih dari satu hari, tampilkan juga tanggal
-    if (now - submittedAt > oneDay) {
-      const dateString = submittedAt.toLocaleDateString();
-      return `${dateString} ${timeString}`;
+  const toggleNoteDetails = (noteId) => {
+    // Jika note yang sedang dibuka sudah aktif, klik lagi untuk menutupnya
+    if (activeNoteId === noteId) {
+      setActiveNoteId(null);
+    } else {
+      setActiveNoteId(noteId); // Set note aktif untuk menampilkan detail
     }
-
-    // Jika masih hari yang sama, tampilkan hanya jam dan menit
-    return timeString;
   };
 
+  const getTileClassName = ({ date, view }) => {
+    if (view === 'month') {
+      const dateStr = date.toDateString();
+      const notesCount = notesByDate[dateStr] ? notesByDate[dateStr].length : 0;
 
-
-  if (error || notesData.length === 0) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
-        <AiOutlineFileExclamation size={50} className="text-gray-400 mb-4" />
-        <h1 className="text-2xl font-bold text-gray-700 mb-2">Data Not Found</h1>
-        <p className="text-gray-500 mb-6">Kamu belum melakukan submit resi disini</p>
-        <button
-          onClick={() => window.location.href = '/notes'}
-          className="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition-all"
-        >
-          Catat resimu disini
-        </button>
-      </div>
-    );
-  }
-
-  const todayNotes = notesData.filter(note => note.submittedAt?.toDateString() === new Date().toDateString());
-  const otherNotes = notesData.filter(note => note.submittedAt?.toDateString() !== new Date().toDateString());
+      if (notesCount > 0) {
+        // Hitung intensitas warna hijau berdasarkan jumlah notes
+        const intensity = Math.min(notesCount * 0.2, 1); // Semakin banyak notes, semakin hijau
+        return `bg-opacity-${Math.floor(intensity * 100)} bg-green-500`;
+      }
+    }
+    return '';
+  };
 
   return (
     <div className="min-h-screen p-4 bg-gray-100 relative">
-      {/* Modal Overlay */}
-      <div className={`modal-overlay ${modalActive ? 'active' : ''}`} onClick={closeModal}></div>
-
-      {/* Modal Content */}
-      {selectedNote && (
-        <div className={`modal-content ${modalActive ? 'active' : ''}`}>
-          <div className="modal-header">
-            <h2>Detail Resi</h2>
-            <span className="modal-close" onClick={closeModal}>&times;</span>
-          </div>
-          <div className="modal-body">
-            <p><strong>Nama:</strong> {selectedNote.nama}</p>
-            <p><strong>Nomor Resi:</strong> {selectedNote.nomorResi}</p>
-            <p><strong>Nama Barang:</strong> {selectedNote.namaBarang}</p>
-            <p><strong>Jumlah Barang:</strong> {selectedNote.jumlahBarang}</p>
-            <p><strong>Alamat:</strong> {selectedNote.alamat}</p>
-            <p><strong>Ekspedisi:</strong> {selectedNote.ekspedisi}</p>
-            <div className="absolute bottom-2 right-2 text-sm text-gray-500">
-              {formatTime(selectedNote.submittedAt)}
-            </div>
-          </div>
-        </div>
-      )}
-
-      <div className="max-w-6xl p-3 mx-auto">
-        <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold">Daftar Resimu</h1>
-          <button
-            onClick={() => window.location.href = '/notes'}
-            className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition-all"
-          >
-            Tambah Resi
-          </button>
+      <div className="max-w-6xl p-6 mx-auto bg-white rounded-lg shadow-lg">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-800">Aktivitas Resi</h1>
         </div>
 
-        {/* Notes Section */}
-        <div className="grid grid-cols-5 md:grid-cols-10 lg:grid-cols-15 text-center">
-          {notesData.map((note) => (
-            <div
-              key={note.id}
-              className={`flip-card w-16 h-16`}
-              onClick={() => handleFlip(note)}
-            >
-              <div className="flip-card-inner">
-                <div className="flip-card-front p-2 bg-gray-200 border-2 border-gray-700 rounded-lg shadow-sm">
-                  <h2 className="text-xl font-semibold"> {note.nomor}</h2>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        {/* Kalender dengan event warna */}
+        <Calendar
+          tileClassName={getTileClassName}
+          onClickDay={handleDateClick}
+          minDate={loginDate}
+          value={selectedDate}
+        />
+
+        {/* Modal untuk menampilkan daftar nomor resi */}
+        {modalActive && (
+  <div className="modal-overlay active" onClick={closeModal}>
+    <div className="modal-content active" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-header">
+        <h2>Notes pada {selectedDate.toDateString()}</h2>
+        <span className="modal-close" onClick={closeModal}>&times;</span>
+      </div>
+      <div className="modal-body">
+        {notesByDate[selectedDate.toDateString()]?.length > 0 ? (
+          <ul className="list-disc list-inside mt-2">
+            {notesByDate[selectedDate.toDateString()].map((note) => (
+              <li key={note.id} className="text-lg">
+                <button
+                  className="text-blue-600 hover:underline"
+                  onClick={() => toggleNoteDetails(note.id)}
+                >
+                  {note.namaBarang} - Resi: {note.nomorResi}
+                </button>
+                {/* Tampilkan detail note jika resi ini diklik */}
+                {activeNoteId === note.id && (
+                  <div className="mt-2 ml-4">
+                    <table className="min-w-full border-collapse">
+                      <tbody>
+                        <tr>
+                          <td className="border px-4 py-2"><strong>Nama:</strong></td>
+                          <td className="border px-4 py-2">{note.nama}</td>
+                        </tr>
+                        <tr>
+                          <td className="border px-4 py-2"><strong>Nomor Resi:</strong></td>
+                          <td className="border px-4 py-2">{note.nomorResi}</td>
+                        </tr>
+                        <tr>
+                          <td className="border px-4 py-2"><strong>Nama Barang:</strong></td>
+                          <td className="border px-4 py-2">{note.namaBarang}</td>
+                        </tr>
+                        <tr>
+                          <td className="border px-4 py-2"><strong>Jumlah Barang:</strong></td>
+                          <td className="border px-4 py-2">{note.jumlahBarang}</td>
+                        </tr>
+                        <tr>
+                          <td className="border px-4 py-2"><strong>Alamat:</strong></td>
+                          <td className="border px-4 py-2">{note.alamat}</td>
+                        </tr>
+                        <tr>
+                          <td className="border px-4 py-2"><strong>Ekspedisi:</strong></td>
+                          <td className="border px-4 py-2">{note.ekspedisi}</td>
+                        </tr>
+                        <tr>
+                          <td className="border px-4 py-2"><strong>Waktu Submit:</strong></td>
+                          <td className="border px-4 py-2 text-gray-500">{note.submittedAt?.toLocaleString()}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Tidak ada notes pada tanggal ini</p>
+        )}
+      </div>
+    </div>
+  </div>
+)}
+
+
       </div>
 
-
-
-      <div>
-        {/* Pindahkan Bottom di luar elemen grid */}
+      <div className="mt-8">
         <Bottom />
       </div>
     </div>

@@ -91,14 +91,17 @@ function Notes() {
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <h1 className="text-2xl font-bold mb-8 fixed top-4 z-10 w-[90%] p-4 mx-auto bg-white/10 backdrop-blur-lg rounded-lg shadow-lg flex justify-between items-center">
+  Form Input Data
+</h1>
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg space-y-4"
+        className="bg-white p-9 mb-16 rounded-lg shadow-lg w-full max-w-lg space-y-4"
       >
-        <h1 className="text-2xl font-bold mb-4 text-center">Form Input Data Shopee</h1>
+       
 
         <div className="space-y-2">
-          <label className="block text-sm font-medium">Nomor:</label>
+          <label className="block text-sm mt-16 font-medium">Nomor:</label>
           <input
             type="text"
             name="nomor"
