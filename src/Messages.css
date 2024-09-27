@@ -1,132 +1,176 @@
-.flip-card {
-  perspective: 100px;
-  cursor: pointer;
-  transition: transform 0.6s;
-  position: relative;
-  z-index: 1; /* Pastikan card tidak menutupi icon */
-}
-  
-  .flip-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    transition: transform 0.6s;
-  }
-  
-  .flipped .flip-card-inner {
-    transform: rotateY(180deg);
-  }
-  
-  .flip-card-front,
-  .flip-card-back {
-    position: absolute;
-    width: 100%;
-    backface-visibility: hidden;
-  }
-  
-  .flip-card-back {
-    transform: rotateY(180deg);
-  }
-  
-/* Overlay blur background */
+/* Styling untuk modal */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8); /* Background gelap */
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  z-index: 10;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6); /* Latar belakang semi-transparan */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-.modal-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Modal Content dengan ukuran tetap */
 .modal-content {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.7);
-  background-color: #f5f5f5; /* Background abu-abu terang */
-  color: #2d2d2d; /* Teks abu-abu gelap */
-  padding: 25px;
-  width: 400px; /* Ukuran tetap lebar */
-  height: 300px; /* Ukuran tetap tinggi */
-  border-radius: 12px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); /* Shadow retro */
-  border: 2px solid #2d2d2d; /* Border abu-abu gelap */
-  z-index: 20;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  opacity: 0;
-  overflow: hidden; /* Pastikan konten tidak meluap */
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto; /* Supaya modal bisa di-scroll jika konten terlalu panjang */
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 
-.modal-content.active {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-/* Header modal dengan font besar */
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid #2d2d2d;
+  border-bottom: 1px solid #e5e5e5;
   padding-bottom: 8px;
-}
-
-.modal-header h2 {
-  margin: 0;
-  font-size: 1.8rem;
-  font-family: 'Courier New', Courier, monospace; /* Font retro */
-  letter-spacing: 1px; /* Spasi huruf retro */
-  color: #2d2d2d;
 }
 
 .modal-close {
   cursor: pointer;
   font-size: 1.5rem;
-  font-weight: bold;
-  color: #f54242; /* Tombol close warna merah */
-  transition: color 0.3s ease;
-}
-
-.modal-close:hover {
-  color: #ff0000; /* Warna lebih terang saat hover */
+  color: #333;
 }
 
 .modal-body {
-  margin-top: 20px;
-  font-family: 'Courier New', Courier, monospace; /* Font retro */
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #2d2d2d;
-  overflow-y: auto; /* Jika konten melebihi, scrollbar akan muncul */
-  max-height: 200px; /* Batasi tinggi konten */
+  padding-top: 16px;
 }
 
-/* Tombol aksi di dalam modal */
-.modal-button {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #2d2d2d; /* Background tombol */
-  color: #f5f5f5; /* Teks tombol */
-  font-family: 'Courier New', Courier, monospace;
+/* Styling untuk list nomor resi */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 16px; /* Beri jarak antar item list */
+}
+
+li button {
+  color: #007bff;
+  font-weight: bold;
+  text-decoration: none;
+  background: none;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 15px;
 }
 
-.modal-button:hover {
-  background-color: #3f3f3f; /* Warna hover tombol */
+li button:hover {
+  text-decoration: underline;
 }
 
+/* Table detail note */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+/* Responsivitas */
+@media (max-width: 768px) {
+  .modal-content {
+    padding: 16px;
+    max-width: 90%;
+  }
+  
+  td {
+    padding: 6px;
+  }
+}
+
+
+/* Style untuk nomor resi ketika detail terbuka */
+li.active button {
+  background-color: #e3f2fd; /* Warna latar belakang biru terang */
+  border: 2px solid #007bff; /* Border biru untuk menyorot */
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s, border 0.3s;
+}
+
+li.active button:hover {
+  background-color: #d0e7fc; /* Warna hover saat resi aktif */
+}
+
+li button {
+  display: inline-block;
+  color: #007bff;
+  font-weight: bold;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+li button:hover {
+  text-decoration: underline;
+}
+
+/* Style untuk detail isi resi */
+.detail-container {
+  margin-top: 8px;
+  padding: 10px;
+  background-color: #f8f9fa; /* Warna latar belakang untuk detail */
+  border-left: 4px solid #007bff; /* Indikator visual untuk keterkaitan */
+  border-radius: 5px;
+}
+
+
+/* Style untuk tabel resi di modal */
+.table-auto {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-auto th,
+.table-auto td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.table-auto th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+.table-auto tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Gaya khusus untuk resi aktif */
+.table-auto tr.active {
+  background-color: #e3f2fd;
+  border-left: 3px solid #007bff;
+}
+
+/* Gaya untuk kontainer detail */
+.detail-container {
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.detail-container table {
+  width: 100%;
+}
+
+.detail-container td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
