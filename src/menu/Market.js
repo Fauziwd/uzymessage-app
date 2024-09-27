@@ -54,15 +54,15 @@ const Market = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Search and Filter */}
-      <div className="fixed -top-1 z-10 w-full p-4 bg-white flex justify-between items-center">
+      <div className="fixed -top-1 z-20 w-full p-4 bg-white/50 backdrop-blur-lg flex justify-between items-center">
         <input 
           type="text" 
           placeholder="Search..." 
-          className="p-2 border rounded-md w-full mr-4"
+          className="p-2 border rounded-md bg-white/20 backdrop-blur-lg w-full mr-4"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <FiSearch className="text-xl text-gray-500" />
+        <FiSearch className="text-xl text-blue-500" />
       </div>
 
       {/* Promo Banner */}

@@ -213,3 +213,7 @@ li button:hover {
 .table-resi td {
   padding: 10px;
 }
+
+.react-calendar__month-view__days__day--weekend {
+  color: black; /* Ubah warna akhir pekan menjadi hitam */
+}
