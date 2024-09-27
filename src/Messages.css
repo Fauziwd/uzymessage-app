@@ -174,3 +174,42 @@ li button:hover {
   padding: 10px;
   border: 1px solid #ddd;
 }
+
+/* Tabel resi */
+.table-resi {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.table-resi th, .table-resi td {
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+}
+
+.table-resi th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+/* Hover efek untuk setiap baris */
+.table-resi tr {
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.table-resi tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Gaya untuk resi aktif */
+.table-resi tr.active {
+  background-color: #e3f2fd;
+  border-left: 3px solid #007bff;
+  font-weight: bold;
+}
+
+.table-resi td {
+  padding: 10px;
+}
