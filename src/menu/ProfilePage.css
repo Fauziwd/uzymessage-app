@@ -1,0 +1,104 @@
+/* Style untuk container utama */
+.profile-container {
+    min-height: 100vh;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Box utama dengan background gradasi */
+.profile-card {
+    background: linear-gradient(to bottom, #e9d5ff, #ffffff);
+    height: 100%;
+    max-height: 500px;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 16px rgba(128, 0, 128, 0.2);
+    padding: 30px;
+}
+
+/* Foto profil */
+.profile-photo {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Nama user dan email */
+.profile-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #6b21a8; /* Ungu tua */
+    margin-bottom: 10px;
+}
+
+.profile-email {
+    color: #6b7280; /* Abu-abu */
+    margin-bottom: 25px;
+}
+
+/* Box untuk informasi barang terjual dan resi */
+.info-box {
+    width: 100%;
+    background-color: #ddd6fe;
+    color: #4c1d95; /* Ungu tua */
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.info-box div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-box p {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Tombol pengaturan akun */
+.profile-button {
+    width: 100%;
+    background-color: #f3e8ff; /* Ungu pastel sangat muda */
+    color: #6b21a8; /* Ungu tua */
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+/* Tombol logout */
+.logout-button {
+    width: 100%;
+    background-color: #ef4444; /* Merah */
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 25px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+/* Transformasi pada klik */
+.profile-button:hover,
+.logout-button:hover {
+    transform: scale(1.05);
+}

@@ -1,0 +1,39 @@
+[
+    {
+      "id": 1,
+      "name": "Sepatu Lokal",
+      "description": "Sepatu buatan lokal dengan bahan berkualitas tinggi.",
+      "imgUrl": "./image/sepatu.jpeg"
+    },
+    {
+      "id": 2,
+      "name": "Keyboard Wireless",
+      "description": "Keyboard wireless nyaman untuk digunakan bekerja.",
+      "imgUrl": "./image/keyboard.jpeg"
+    },
+    {
+      "id": 3,
+      "name": "Monitor",
+      "description": "Monitor full HD dengan refresh rate tinggi.",
+      "imgUrl": "./image/monitor.jpeg"
+    },
+    {
+      "id": 4,
+      "name": "Dress Well",
+      "description": "Dress modis dengan bahan premium.",
+      "imgUrl": "./image/fashion.jpeg"
+    },
+    {
+      "id": 5,
+      "name": "Kosmetik",
+      "description": "Kosmetik berkualitas tinggi dengan bahan-bahan alami.",
+      "imgUrl": "./image/kosmetik.jpeg"
+    },
+    {
+      "id": 6,
+      "name": "Tas Ransel",
+      "description": "Tas ransel dengan banyak ruang dan bahan tahan lama.",
+      "imgUrl": "./image/tas.jpeg"
+    }
+  ]
+  

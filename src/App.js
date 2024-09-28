@@ -9,6 +9,7 @@ import HomePage from './HomePage';
 import ProfilePage from './menu/ProfilePage';
 import Market from './menu/Market';
 import Donate from './menu/Donate';
+import ProductDetail from './ProductDetail';
 import './App.css'; // Pastikan file CSS diimpor
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/market" element={<Market />} />
         <Route path="/donate" element={<Donate />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
         <Route
           path="/notes"
           element={user ? <Notes /> : <Navigate to="/login" replace />}

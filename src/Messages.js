@@ -149,18 +149,18 @@ function Messages() {
 
       if (notesCount > 0) {
         const intensity = Math.min(notesCount * 0.2, 1);
-        return `bg-opacity-${Math.floor(intensity * 100)} rounded-full bg-green-500`;
+        return `bg-opacity-${Math.floor(intensity * 100)} bg-pink-300`;
       }
-    } 
+    }
     return '';
   };
 
   return (
     <>
-      <div className="min-h-screen p-4 bg-gray-100 relative">
+      <div className="min-h-screen p-4 bg-white relative">
         <div className="max-w-6xl p-6 mx-auto bg-white rounded-lg">
           <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-800">Aktivitas Resi</h1>
+            <h1 className="text-3xl font-bold text-gray-800">Arsip Resi</h1>
           </div>
 
           <Calendar
@@ -168,7 +168,9 @@ function Messages() {
             onClickDay={handleDateClick}
             minDate={loginDate}
             value={selectedDate}
+            className="react-calendar" // Tambahkan kelas ini untuk styling kalender
           />
+
 
           {modalActive && (
             <div className="modal-overlay active flex justify-center items-center">
@@ -178,7 +180,7 @@ function Messages() {
               >
                 <div className="modal-header flex justify-between items-center border-b pb-2 mb-4">
                   <h2 className="text-xl font-semibold">
-                   <mark>{selectedDate.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</mark>
+                    <mark>{selectedDate.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</mark>
 
                   </h2>
                   <span
@@ -201,7 +203,7 @@ function Messages() {
                         {notesByDate[selectedDate.toDateString()].map((note) => (
                           <tr
                             key={note.id}
-                            className={`cursor-pointer ${activeNoteId === note.id ? 'bg-blue-100' : ''
+                            className={`cursor-pointer ${activeNoteId === note.id ? 'bg-blue-300' : ''
                               }`}
                             onClick={() => toggleNoteDetails(note.id)}
                           >
@@ -212,7 +214,7 @@ function Messages() {
                       </tbody>
                     </table>
                   ) : (
-                    <p className="text-gray-600">Anda tidak menambahkan apapun.</p>
+                    <p className="text-gray-600">Tidak ada aktivitas pada hari ini.</p>
                   )}
 
                   {activeNoteId && (
@@ -280,7 +282,7 @@ function Messages() {
         </div>
 
         <div className="flex justify-between items-center mt-5">
-          <select id="filter" className="p-1 mb-2 bg-black/10 backdrop-blur-lg text-gray-800 rounded" onChange={(e) => setFilter(e.target.value)}>
+          <select id="filter" className="p-1 mb-2 bg-white/10 backdrop-blur-lg text-gray-800 rounded" onChange={(e) => setFilter(e.target.value)}>
             <option value="1week">Pekan ini</option>
             <option value="1month">Bulan ini</option>
             <option value="1year">Tahun ini</option>
@@ -288,8 +290,8 @@ function Messages() {
         </div>
 
 
-        <div className="min-h-screen bg-gray-100">
-          <div className="max-w-6xl p-6 mx-auto bg-white rounded-lg shadow-lg">
+        <div className=" bg-white">
+          <div className="max-w-6xl p-6 mx-auto bg-white rounded-lg">
             <h1 className="text-3xl font-bold mb-4">Pembeli Terbanyak</h1>
 
             {/* <Filter onFilterChange={setFilter} /> */}
