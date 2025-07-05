@@ -154,7 +154,7 @@ li button:hover {
 /* Gaya khusus untuk resi aktif */
 .table-auto tr.active {
   background-color: #e3f2fd;
-  border-left: 3px solid #007bff;
+  border-left: 3px solid #704bac;
 }
 
 /* Gaya untuk kontainer detail */
@@ -206,7 +206,7 @@ li button:hover {
 /* Gaya untuk resi aktif */
 .table-resi tr.active {
   background-color: #e3f2fd;
-  border-left: 3px solid #007bff;
+  border-left: 3px solid #A594F9;
   font-weight: bold;
 }
 
@@ -228,11 +228,12 @@ li button:hover {
 }
 
 .react-calendar__tile {
-  background-color: #fff;
-  color: #6c5ce7;
-  border-radius: 0px;
-  box-shadow: 10px;
-  transition: transform 0.2s ease-in-out, box-shadow 0.4s ease-in-out;
+  position: relative;
+  text-align: center;
+}
+
+.react-calendar__tile.highlighted {
+  background-color: lightgreen !important;
 }
 
 .react-calendar__tile:enabled:hover, .react-calendar__tile:enabled:focus {
@@ -277,11 +278,11 @@ li button:hover {
 
 /* Event section */
 .events {
-  background-color: #dfe6e9;
+  background-color: #A594F9;
   border-radius: 10px;
   padding: 10px;
   margin-top: 10px;
-  color: #2d3436;
+  color: #A594F9;
 }
 
 .events h3 {
@@ -311,4 +312,42 @@ li button:hover {
 .add-event-button:hover {
   background-color: #ff4757;
 }
+
+
+/* CSS untuk animasi slide */
+@keyframes slideDown {
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+  to {
+    max-height: 500px; /* Sesuaikan dengan konten */
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    max-height: 500px;
+    opacity: 1;
+  }
+  to {
+    max-height: 0;
+    opacity: 0;
+  }
+}
+
+.details-container {
+  max-height: 0;
+  transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.details-container.active {
+  animation: slideDown 0.5s forwards;
+}
+
+.details-container.inactive {
+  animation: slideUp 0.5s forwards;
+}
+
 

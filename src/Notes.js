@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { getFirestore, collection, doc, setDoc, getDocs, serverTimestamp } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, serverTimestamp, getDocs } from 'firebase/firestore';
 import Bottom from './Side/Bottom';
 
 function Notes() {
@@ -18,6 +18,7 @@ function Notes() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [barangList, setBarangList] = useState([]);
 
   useEffect(() => {
     const auth = getAuth();
@@ -32,8 +33,14 @@ function Notes() {
           const notesSnapshot = await getDocs(notesCollection);
           const nextNomor = notesSnapshot.size + 1;
           setFormData((prevData) => ({ ...prevData, nomor: nextNomor.toString() }));
+
+          // Mengambil daftar barang dari Firestore
+          const itemsCollection = collection(firestore, 'users', user.uid, 'items');
+          const itemsSnapshot = await getDocs(itemsCollection);
+          const items = itemsSnapshot.docs.map((doc) => doc.data());
+          setBarangList(items); // Simpan daftar barang ke state
         } catch (error) {
-          console.error("Error fetching notes collection:", error);
+          console.error("Error fetching notes or items collection:", error);
         }
       } else {
         window.location.href = '/login';
@@ -52,23 +59,25 @@ function Notes() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const firestore = getFirestore();
-
+  
     try {
       if (user) {
-        const userDoc = doc(firestore, 'users', user.uid, 'notes', formData.nomor);
-
-        // Tambahkan field submittedAt dengan serverTimestamp
-        await setDoc(userDoc, {
+        const notesCollection = collection(firestore, 'users', user.uid, 'notes');
+        
+        // Menyimpan tanggal yang dipilih oleh user
+        await addDoc(notesCollection, {
           ...formData,
-          submittedAt: serverTimestamp()  // Menyimpan waktu server saat submit
+          tanggal: formData.tanggal,  // Gunakan tanggal dari form
+          submittedAt: serverTimestamp(),  // Tetap simpan waktu submit server untuk referensi waktu submit
         });
-
+  
         setShowModal(true);
-
+  
+        // Reset form data setelah submit
         setFormData((prevData) => ({
           ...prevData,
           nomorResi: '',
-          tanggal: '',
+          tanggal: '',  // Reset tanggal
           nama: '',
           namaBarang: '',
           jumlahBarang: '',
@@ -80,25 +89,24 @@ function Notes() {
       console.error('Error adding document: ', error);
     }
   };
+  
+
 
   const closeModal = () => {
     setShowModal(false);
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <h1 className="text-2xl font-bold mb-8 fixed top-4 z-10 w-[90%] p-4 mx-auto bg-white/10 backdrop-blur-lg rounded-lg shadow-lg flex justify-between items-center">
-  Form Input Data
-</h1>
+        Form Input Data
+      </h1>
       <form
         onSubmit={handleSubmit}
         className="bg-white p-9 mb-16 rounded-lg shadow-lg w-full max-w-lg space-y-4"
       >
-       
 
         <div className="space-y-2">
           <label className="block text-sm mt-16 font-medium">Nomor:</label>
@@ -150,14 +158,20 @@ function Notes() {
 
         <div className="space-y-2">
           <label className="block text-sm font-medium">Nama Barang:</label>
-          <input
-            type="text"
+          <select
             name="namaBarang"
             value={formData.namaBarang}
             onChange={handleChange}
             className="w-full border border-gray-300 p-2 rounded"
             required
-          />
+          >
+            <option value="">Pilih Barang</option>
+            {barangList.map((barang, index) => (
+              <option key={index} value={barang.namaBarang}>
+                {barang.namaBarang} - Rp{barang.hargaBarang}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="space-y-2">

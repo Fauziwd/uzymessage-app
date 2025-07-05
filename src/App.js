@@ -10,6 +10,7 @@ import ProfilePage from './menu/ProfilePage';
 import Market from './menu/Market';
 import Donate from './menu/Donate';
 import ProductDetail from './ProductDetail';
+import Add from './menu/Add';
 import './App.css'; // Pastikan file CSS diimpor
 
 function App() {
@@ -42,7 +43,8 @@ function App() {
     <Router>
       {alert && (
         <div className="alert bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-          {alert}
+
+{alert}
         </div>
       )}
       <Routes>
@@ -54,6 +56,7 @@ function App() {
         <Route path="/market" element={<Market />} />
         <Route path="/donate" element={<Donate />} />
         <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/addyours" element={<Add />} />
         <Route
           path="/notes"
           element={user ? <Notes /> : <Navigate to="/login" replace />}

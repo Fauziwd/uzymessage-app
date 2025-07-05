@@ -1,0 +1,22 @@
+/* Mobile devices */
+@media (max-width: 640px) {
+    .bg-cover {
+      background-size: contain; /* Use contain for smaller screens to fit the entire image */
+      background-repeat: no-repeat; /* No repeating */
+    }
+  }
+  
+  /* Tablet devices */
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .bg-cover {
+      background-size: cover; /* Cover the screen with the background */
+    }
+  }
+  
+  /* Desktop devices */
+  @media (min-width: 1025px) {
+    .bg-cover {
+      background-size: cover;
+    }
+  }
+  

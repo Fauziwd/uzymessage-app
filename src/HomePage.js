@@ -56,7 +56,7 @@ function HomePage() {
 
             <main className="flex-grow p-4 mt-20 mb-16">
   {/* Categories Section */}
-  <section className="mb-4 mt-4 fixed top-16 left-0 right-0 bg-gray-200 p-4">
+  <section className="mb-4 mt-4 fixed top-16 left-0 right-0 h-56 bg-gray-200 p-4">
   <div className="max-w-screen-lg mx-auto">
     <h2 className="text-xl font-semibold mb-2">
       Categories
@@ -65,7 +65,7 @@ function HomePage() {
     <div className="flex gap-4 overflow-x-auto scrollbar-hide mb-3 py-2 px-4">
       {['Market', 'Notes', 'Messages', 'Donate'].map((category, index) => (
         <Link to={`/${category.toLowerCase()}`} key={index}>
-          <div className="flex flex-col items-center bg-white rounded-lg shadow p-4 h-28 min-w-[100px] w-full sm:w-auto">
+          <div className="flex flex-col items-center bg-white rounded-lg p-4 h-28 min-w-[100px] w-full sm:w-auto">
             <img
               src={categoryImages[category]}
               alt={category}
@@ -81,11 +81,11 @@ function HomePage() {
 
 
   {/* Spacer untuk memberi ruang pada konten di bawah fixed Categories */}
-  <div className="h-[140px]"></div>
+  <div className="h-[170px]"></div>
 
   {/* Popular Products Section */}
   <section className="mt-16 mb-9 bg-gray-200">
-    <h2 className="text-xl font-semibold mb-2">
+    <h2 className="text-xl fixed top-64 font-semibold mt-3">
       Popular Products
     </h2>
     <div className="grid grid-cols-2 gap-4">

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaHome, FaHeart, FaUser, FaBell, FaPlus, FaShoppingCart } from 'react-icons/fa';
+import { FaHome, FaShoppingCart, FaPlus } from 'react-icons/fa';
 import { FaRegUser } from 'react-icons/fa6';
 import { MdOutlineStickyNote2 } from 'react-icons/md';
 import { Link, useLocation } from 'react-router-dom'; // Import Link dan useLocation
@@ -18,9 +18,9 @@ function Bottom() {
       <div className="flex justify-around items-center relative">
         {[
           { name: 'home', icon: <FaHome />, link: '/home' },
-          { name: 'favorites', icon: <FaShoppingCart />, link:'/market'  },
+          { name: 'favorites', icon: <FaShoppingCart />, link: '/market' },
           { name: 'plus', icon: <FaPlus />, link: '/notes' },
-          { name: 'notifications', icon: <MdOutlineStickyNote2 />, link:'/messages'},
+          { name: 'notifications', icon: <MdOutlineStickyNote2 />, link: '/messages' },
           { name: 'profile', icon: <FaRegUser />, link: '/profile' },
         ].map((item, index) => (
           <Link
