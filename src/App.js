@@ -37,10 +37,11 @@ function App() {
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 2500); // Durasi loader
-    const unsubscribe = auth.onAuthStateChanged((user) => setUser(user));
+    // NONAKTIFKAN SEMENTARA: Cek status login pengguna
+    // const unsubscribe = auth.onAuthStateChanged((user) => setUser(user));
     return () => {
       clearTimeout(timer);
-      unsubscribe();
+      // unsubscribe();
     };
   }, []);
 
@@ -100,10 +101,10 @@ function App() {
               <Route path="/video-editing" element={<VideoEditingPage />} />
               <Route path="/typing" element={<TypingPage />} />
               
-              {/* Rute Generik dan Terproteksi */}
+              {/* Rute Generik dan Terproteksi (Login Dinonaktifkan) */}
               <Route path="/service/:serviceName" element={<ServicePage />} />
-              <Route path="/messages" element={user ? <Messages /> : <Navigate to="/login" replace />} />
-              <Route path="/notes" element={user ? <Notes /> : <Navigate to="/login" replace />} />
+              <Route path="/messages" element={<Messages />} />
+              <Route path="/notes" element={<Notes />} />
             </Routes>
         </main>
       
