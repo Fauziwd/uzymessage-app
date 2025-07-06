@@ -20,7 +20,7 @@ function IndexAuth() {
       <section className="text-left mb-3 p-8">
         <h1 className="text-3xl font-bold mb-4">Welcome to Our App</h1>
         <p className="text-lg text-gray-600 mb-4">
-         Sekarang kamu tidak perlu menuliskan rekap penjualanmu di buku catatan, cukup tulis disini saja, kami akan menyimpannya!
+         Temukan layanan kreatif dan produk berkualitas dengan harga terjangkau. Mulai dari desain hingga teknologi, kami siap membantu Anda mencapai tujuan yang Anda inginkan.
         </p>
       </section>
 
@@ -28,7 +28,7 @@ function IndexAuth() {
       <section className="flex flex-col items-center">
         <Link to="/login">
           <button className="bg-indigo-600 text-white px-28 py-3 rounded-full shadow-lg hover:bg-indigo-800 transition duration-300">
-            Next
+            klik disini
           </button>
         </Link>
       </section>
