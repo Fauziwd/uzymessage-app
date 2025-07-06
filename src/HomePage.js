@@ -248,7 +248,7 @@ function HomePage() {
     Punya Usaha Tapi Belum <span className="text-retro-green">Maksimal?</span>
   </h1>
   <p className="text-lg text-retro-text/80 max-w-2xl mb-5 mx-auto">
-    Sini kami bantu! Temukan berbagai jasa digital untuk melesatkan usaha Anda ke level berikutnya.
+    Sini kami bantu! Temukan berbagai jasa digital untuk melesatkan usaha Anda.
   </p>
           
           <motion.button
