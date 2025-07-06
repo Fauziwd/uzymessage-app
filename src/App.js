@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { auth } from './firebase'; // Pastikan auth diimpor dari firebase.js
 
 // --- Import Halaman dan Komponen ---
-// import IndexAuth from './auth/IndexAuth'; // Tidak digunakan
-// import Login from './auth/Login'; // Tidak digunakan
+import IndexAuth from './auth/IndexAuth';
+// import Login from './auth/Login';
 import Messages from './Messages';
 import Notes from './Notes';
 import HomePage from './HomePage';
@@ -31,14 +31,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 import './App.css'; // Pastikan CSS utama diimpor
 
 function App() {
-  const [user, setUser] = useState(null); // State user tidak lagi digunakan untuk routing
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [alert, setAlert] = useState('');
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 2500); // Durasi loader
-    // Pemeriksaan login dinonaktifkan
-    return () => clearTimeout(timer);
+    // NONAKTIFKAN SEMENTARA: Cek status login pengguna
+    // const unsubscribe = auth.onAuthStateChanged((user) => setUser(user));
+    return () => {
+      clearTimeout(timer);
+      // unsubscribe();
+    };
   }, []);
 
   if (loading) {
@@ -72,38 +76,38 @@ function App() {
         )}
       </AnimatePresence>
 
-      <main className="relative z-10">
-        <Routes>
-          {/* Rute Utama langsung ke HomePage */}
-          <Route path="/" element={<HomePage />} />
+        <main className="relative z-10">
+            <Routes>
+              {/* Rute Autentikasi dan Utama */}
+              {/* <Route path="/" element={<IndexAuth />} /> */}
+              {/* <Route path="/login" element={<Login setAlert={setAlert} />} /> */}
+              <Route path="/home" element={<HomePage />} />
 
-          {/* Rute lain bisa tetap ada, atau diubah sesuai kebutuhan */}
-          <Route path="/home" element={<HomePage />} />
+              {/* Rute Menu */}
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/market" element={<Market />} />
+              <Route path="/donate" element={<Donate />} />
+              <Route path="/product/:id" element={<ProductDetail />} />
+              <Route path="/addyours" element={<Add />} />
 
-          {/* Rute Menu */}
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/market" element={<Market />} />
-          <Route path="/donate" element={<Donate />} />
-          <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path="/addyours" element={<Add />} />
-
-          {/* Rute Layanan */}
-          <Route path="/powerpoint" element={<PowerPointPage />} />
-          <Route path="/banner" element={<BannerPage />} />
-          <Route path="/website" element={<WebsitePage />} />
-          <Route path="/portfolio" element={<PortfolioPage />} />
-          <Route path="/social-media" element={<SocialMediaPage />} />
-          <Route path="/thumbnail" element={<ThumbnailPage />} />
-          <Route path="/photo-editing" element={<PhotoEditingPage />} />
-          <Route path="/video-editing" element={<VideoEditingPage />} />
-          <Route path="/typing" element={<TypingPage />} />
-          
-          {/* Rute Generik */}
-          <Route path="/service/:serviceName" element={<ServicePage />} />
-          <Route path="/messages" element={<Messages />} />
-          <Route path="/notes" element={<Notes />} />
-        </Routes>
-      </main>
+              {/* Rute Layanan */}
+              <Route path="/powerpoint" element={<PowerPointPage />} />
+              <Route path="/banner" element={<BannerPage />} />
+              <Route path="/website" element={<WebsitePage />} />
+              <Route path="/portfolio" element={<PortfolioPage />} />
+              <Route path="/social-media" element={<SocialMediaPage />} />
+              <Route path="/thumbnail" element={<ThumbnailPage />} />
+              <Route path="/photo-editing" element={<PhotoEditingPage />} />
+              <Route path="/video-editing" element={<VideoEditingPage />} />
+              <Route path="/typing" element={<TypingPage />} />
+              
+              {/* Rute Generik dan Terproteksi (Login Dinonaktifkan) */}
+              <Route path="/service/:serviceName" element={<ServicePage />} />
+              <Route path="/messages" element={<Messages />} />
+              <Route path="/notes" element={<Notes />} />
+            </Routes>
+        </main>
+      
     </Router>
   );
 }
