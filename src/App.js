@@ -4,7 +4,7 @@ import { auth } from './firebase'; // Pastikan auth diimpor dari firebase.js
 
 // --- Import Halaman dan Komponen ---
 import IndexAuth from './auth/IndexAuth';
-import Login from './auth/Login';
+// import Login from './auth/Login';
 import Messages from './Messages';
 import Notes from './Notes';
 import HomePage from './HomePage';
@@ -79,8 +79,8 @@ function App() {
         <main className="relative z-10">
             <Routes>
               {/* Rute Autentikasi dan Utama */}
-              <Route path="/" element={<IndexAuth />} />
-              <Route path="/login" element={<Login setAlert={setAlert} />} />
+              {/* <Route path="/" element={<IndexAuth />} /> */}
+              {/* <Route path="/login" element={<Login setAlert={setAlert} />} /> */}
               <Route path="/home" element={<HomePage />} />
 
               {/* Rute Menu */}
