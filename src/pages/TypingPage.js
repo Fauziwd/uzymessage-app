@@ -62,7 +62,7 @@ function TypingPage() {
       </main>
 
       {/* Footer Navigasi */}
-      <Bottom />
+      {/* <Bottom /> */}
     </div>
   );
 }

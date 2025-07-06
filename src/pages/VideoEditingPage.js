@@ -62,7 +62,7 @@ function VideoEditingPage() {
       </main>
 
       {/* Footer Navigasi */}
-      <Bottom />
+      {/* <Bottom /> */}
     </div>
   );
 }
