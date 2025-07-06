@@ -242,7 +242,7 @@ function Notes() {
           </div>
         </div>
       )}
-      <Bottom />
+      {/* <Bottom /> */}
     </div>
   );
 }

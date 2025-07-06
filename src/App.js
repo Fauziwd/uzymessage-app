@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+// Pastikan Navigate diimpor dari react-router-dom
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { auth } from './firebase'; // Pastikan auth diimpor dari firebase.js
 
@@ -78,6 +79,10 @@ function App() {
 
         <main className="relative z-10">
             <Routes>
+              {/* --- TAMBAHKAN BARIS INI --- */}
+              {/* Rute ini akan mengalihkan dari path "/" ke "/home" */}
+              <Route path="/" element={<Navigate to="/home" />} />
+
               {/* Rute Autentikasi dan Utama */}
               {/* <Route path="/" element={<IndexAuth />} /> */}
               {/* <Route path="/login" element={<Login setAlert={setAlert} />} /> */}

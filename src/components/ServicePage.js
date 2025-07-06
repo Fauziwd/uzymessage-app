@@ -39,7 +39,7 @@ function ServicePage({ title, description, image, price, orderLink }) {
           </div>
         </div>
       </main>
-      <Bottom />
+      {/* <Bottom /> */}
     </div>
   );
 }

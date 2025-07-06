@@ -45,42 +45,42 @@ const services = [
 const recommendedItems = [
   { 
     id: 1, 
-    name: 'Sepatu Kanvas Klasik', 
-    price: 'IDR 180K', 
+    name: 'Aerostreet X Gibran', 
+    price: 'IDR 193K', 
     category: 'Gaya Hidup', 
     image: './image/sepatu.jpeg', 
-    link: 'https://s.shopee.co.id/6V5DyGnICR',
-    rating: 4,
+    link: 'https://s.shopee.co.id/7V5C9NFXPP',
+    rating: 5,
     isTrending: true
   },
   { 
     id: 2, 
-    name: 'Keyboard Typewriter', 
-    price: 'IDR 200K', 
+    name: 'Keyboard Noir Timeless82 V2', 
+    price: 'IDR 800K', 
     category: 'Aksesoris', 
     image: './image/keyboard.jpeg', 
-    link: 'https://s.shopee.co.id/g7R1dXjzI',
+    link: 'https://s.shopee.co.id/801SkK9wI8',
     rating: 5,
     isNew: true
   },
   { 
     id: 3, 
-    name: 'Kemeja Flanel Vintage', 
+    name: 'Cardigan Hitam', 
     price: 'IDR 75K', 
     category: 'Pakaian', 
-    image: './image/fashion.jpeg', 
-    link: 'https://s.shopee.co.id/3q4SnUPPmL',
-    rating: 4,
+    image: './image/cardigan.jpeg', 
+    link: 'https://s.shopee.co.id/6ppVMFPtZB',
+    rating: 5,
     isBestSeller: true
   },
   { 
     id: 4, 
-    name: 'Tas Ransel Kulit Sintetis', 
-    price: 'IDR 80K', 
+    name: 'Ransel Eiger 21L', 
+    price: 'IDR 530K', 
     category: 'Aksesoris', 
     image: './image/tas.jpeg', 
-    link: 'https://s.shopee.co.id/8f9iYQ5fJH',
-    rating: 3
+    link: 'https://s.shopee.co.id/6KtElHbOhk',
+    rating: 5
   },
 ];
 
@@ -520,7 +520,7 @@ function HomePage() {
 
       </main>
       
-      <Bottom />
+      {/* <Bottom /> */}
     </div>
   );
 }

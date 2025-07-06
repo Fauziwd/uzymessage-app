@@ -78,9 +78,10 @@ function BannerPage() {
           >
             <div className="relative rounded-xl overflow-hidden shadow-2xl border-8 border-white">
               <img 
-                src="/image/services/banner-design.jpg" 
+                src="/image/banner.jpeg" 
                 alt="Contoh Desain Banner" 
                 className="w-full h-auto object-cover"
+                draggable="false"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent"></div>
             </div>

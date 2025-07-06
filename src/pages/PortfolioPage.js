@@ -27,22 +27,22 @@ function PortfolioPage() {
     {
       title: "Portofolio Desainer",
       features: ["Tampilan visual menarik", "Galeri karya interaktif", "Optimasi untuk perangkat mobile"],
-      image: "/image/services/portfolio-design.jpg"
+      image: "/image/portfolio-design.jpeg"
     },
     {
       title: "Portofolio Fotografer",
       features: ["Galeri foto fullscreen", "Kategori terorganisir", "Watermark otomatis"],
-      image: "/image/services/portfolio-photo.jpg"
+      image: "/image/portfolio-photo.jpeg"
     },
     {
       title: "Portofolio Developer",
       features: ["Tampilan proyek coding", "Embed demo langsung", "Integrasi GitHub"],
-      image: "/image/services/portfolio-dev.jpg"
+      image: "/image/portfolio-dev.jpeg"
     }
   ];
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="min-h-screen bg-gradient-to-b from-gray-50 to-white"
@@ -51,7 +51,7 @@ function PortfolioPage() {
       <section className="relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 py-20 md:py-28 flex flex-col md:flex-row items-center gap-8 md:gap-12">
           <div className="md:w-1/2 space-y-5">
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
@@ -59,7 +59,7 @@ function PortfolioPage() {
             >
               <span className="text-blue-600">Jasa {serviceName}</span> Profesional
             </motion.h1>
-            
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -68,7 +68,7 @@ function PortfolioPage() {
             >
               Tampilkan karya terbaik Anda dengan portofolio digital yang elegan dan profesional. Cocok untuk desainer, fotografer, developer, dan profesional kreatif lainnya untuk memikat klien.
             </motion.p>
-            
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -87,17 +87,17 @@ function PortfolioPage() {
               </div>
             </motion.div>
           </div>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4 }}
             className="md:w-1/2 relative"
           >
             <div className="relative rounded-xl overflow-hidden shadow-2xl border-8 border-white">
-              <img 
-                src="/image/services/portfolio.jpg" 
-                alt="Contoh Portofolio Digital" 
+              <img
+                src="/image/portfolio.jpeg"
+                alt="Contoh Portofolio Digital"
                 className="w-full h-auto object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 to-transparent"></div>
@@ -135,9 +135,9 @@ function PortfolioPage() {
                 className="bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all"
               >
                 <div className="h-48 overflow-hidden">
-                  <img 
-                    src={type.image} 
-                    alt={type.title} 
+                  <img
+                    src={type.image}
+                    alt={type.title}
                     className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                   />
                 </div>
@@ -204,7 +204,7 @@ function PortfolioPage() {
                 desc: "Desain unik sesuai brand Anda"
               }
             ].map((feature, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
                 variants={item}
                 whileHover={{ y: -5 }}
@@ -241,7 +241,7 @@ function PortfolioPage() {
               className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg shadow-md transition-all duration-300"
             >
               <FaWhatsapp className="text-xl" />
-              Pesan via WhatsApp
+              Order Now!
             </a>
           </motion.div>
         </div>

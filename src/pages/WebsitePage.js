@@ -68,23 +68,23 @@ function WebsitePage() {
             className="min-h-screen bg-white"
         >
             {/* Hero Section */}
-            <section className="relative overflow-hidden bg-green-700 text-white">
+            <section className="relative overflow-hidden border-dashed border-y-2 border-teal-900 bg-gray-200/20 text-white">
                 <div className="max-w-7xl mx-auto px-4 py-20 md:py-28 flex flex-col md:flex-row items-center gap-8 md:gap-12">
                     <div className="md:w-1/2 space-y-6">
                         <motion.h1
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1 }}
-                            className="text-4xl md:text-5xl font-bold"
+                            className="text-4xl md:text-5xl text-teal-800 font-bold"
                         >
-                            <span className="text-white">Komplet<span className="text-green-200">In</span></span> Web Development
+                            <span className="text-teal-800">Komplet<span className="text-green-200">In</span></span> Web Development
                         </motion.h1>
 
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="text-xl text-blue-100"
+                            className="text-xl text-teal-700"
                         >
                             Create Your Own Site - Bangun website impian Anda dengan tim profesional kami
                         </motion.p>
@@ -102,24 +102,24 @@ function WebsitePage() {
                                 <FaWhatsapp className="text-xl" />
                                 Order Here!
                             </a>
-                            <div className="px-6 py-3 bg-blue-600/30 border border-blue-400/20 rounded-lg backdrop-blur-sm">
+                            <div className="px-6 py-3 bg-emerald-600 border border-blue-400/20 rounded-lg backdrop-blur-sm">
                                 <p className="font-semibold">konsultasikan harga dengan admin kami</p>
                             </div>
                         </motion.div>
                     </div>
 
-                    {/* <motion.div
+                    <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.4 }}
                         className="md:w-1/2 relative"
                     >
                         <img
-                            src="/image/services/web-dev.jpg"
+                            src="/image/web-banner.jpg"
                             alt="Web Development"
-                            className="w-full rounded-xl shadow-2xl border-4 border-blue-500"
+                            className="w-full rounded-xl shadow-2xl border-4 border-gray-500 border-dashed border-x-2"
                         />
-                    </motion.div> */}
+                    </motion.div>
                 </div>
             </section>
 
@@ -189,11 +189,11 @@ function WebsitePage() {
 
                         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
                             {[
-                                { step: "1", title: "Konsultasi", desc: "Diskusikan kebutuhan website Anda" },
-                                { step: "2", title: "Desain", desc: "Pembuatan mockup dan UI/UX" },
-                                { step: "3", title: "Development", desc: "Proses coding dan implementasi" },
-                                { step: "4", title: "Testing", desc: "Pengujian semua fitur" },
-                                { step: "5", title: "Launch", desc: "Website siap digunakan" }
+                                { step: "1", title: "💬 Konsultasi", desc: "Diskusikan kebutuhan website Anda" },
+                                { step: "2", title: "🎨 Desain", desc: "Pembuatan mockup dan UI/UX" },
+                                { step: "3", title: "👨🏼‍💻 Development", desc: "Proses coding dan implementasi" },
+                                { step: "4", title: "🧫 Testing", desc: "Pengujian semua fitur" },
+                                { step: "5", title: "🚀 Launch", desc: "Website siap digunakan" }
                             ].map((step, index) => (
                                 <motion.div
                                     key={index}
@@ -225,7 +225,7 @@ function WebsitePage() {
                         viewport={{ once: true }}
                     >
                         <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                            Siap Membangun Website Profesional?
+                            Siap Meningkatkan Usaha Anda?
                         </h2>
                         <p className="text-xl text-blue-100 mb-8">
                             Jadikan bisnis Anda lebih profesional dengan website berkualitas

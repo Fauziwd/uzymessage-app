@@ -1,6 +1,30 @@
 import React from 'react';
-import { FaWhatsapp, FaCameraRetro, FaMagic, FaObjectGroup, FaSmile } from 'react-icons/fa';
+// Menambahkan FaImage untuk ikon placeholder
+import { FaWhatsapp, FaCameraRetro, FaMagic, FaObjectGroup, FaSmile, FaImage } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+
+// --- Komponen Baru untuk Gambar Tidak Tersedia ---
+function ImageNotAvailable() {
+  return (
+    <div className="flex flex-col items-center justify-center p-8 bg-gray-100 rounded-xl border-2 border-dashed border-gray-300">
+      <div className="relative mb-4">
+        {/* Efek 3D dibuat dengan shadow dan elemen bertumpuk */}
+        <FaImage className="text-6xl text-gray-300" />
+        <FaImage
+          className="absolute top-0 left-0 text-6xl text-gray-400"
+          style={{ transform: 'translate(2px, 2px)', filter: 'blur(2px)', zIndex: -1 }}
+        />
+      </div>
+      <h3 className="text-xl font-semibold text-gray-600">
+        Oops! Gambar Belum Tersedia
+      </h3>
+      <p className="text-gray-500 text-center mt-1">
+        Maaf, portofolio untuk layanan ini sedang kami persiapkan.
+      </p>
+    </div>
+  );
+}
+
 
 function PhotoEditingPage() {
   const serviceName = "Editing Foto Profesional";
@@ -23,14 +47,16 @@ function PhotoEditingPage() {
     show: { opacity: 1, y: 0 }
   };
 
-  const beforeAfterImages = [
-    { before: "/image/services/photo-before1.jpg", after: "/image/services/photo-after1.jpg" },
-    { before: "/image/services/photo-before2.jpg", after: "/image/services/photo-after2.jpg" },
-    { before: "/image/services/photo-before3.jpg", after: "/image/services/photo-after3.jpg" }
-  ];
+  // --- SIMULASI: Gambar tidak tersedia (array dikosongkan) ---
+  const beforeAfterImages = [];
+  // const beforeAfterImages = [
+  //   { before: "/image/services/photo-before1.jpg", after: "/image/services/photo-after1.jpg" },
+  //   { before: "/image/services/photo-before2.jpg", after: "/image/services/photo-after2.jpg" },
+  //   { before: "/image/services/photo-before3.jpg", after: "/image/services/photo-after3.jpg" }
+  // ];
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="min-h-screen bg-gradient-to-b from-gray-50 to-white"
@@ -39,7 +65,7 @@ function PhotoEditingPage() {
       <section className="relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 py-20 md:py-28 flex flex-col md:flex-row items-center gap-8 md:gap-12">
           <div className="md:w-1/2 space-y-5">
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
@@ -47,7 +73,7 @@ function PhotoEditingPage() {
             >
               <span className="text-blue-600">Jasa {serviceName}</span> Berkualitas Tinggi
             </motion.h1>
-            
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -56,7 +82,7 @@ function PhotoEditingPage() {
             >
               Dari perbaikan warna, retouching, hingga manipulasi foto, kami siap membuat foto Anda terlihat sempurna. Cocok untuk foto produk, potret, atau acara spesial.
             </motion.p>
-            
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -75,17 +101,17 @@ function PhotoEditingPage() {
               </div>
             </motion.div>
           </div>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4 }}
             className="md:w-1/2 relative"
           >
             <div className="relative rounded-xl overflow-hidden shadow-2xl border-8 border-white">
-              <img 
-                src="/image/services/photo-edit.jpg" 
-                alt="Contoh Editing Foto" 
+              <img
+                src="/image/photoedit.jpeg"
+                alt="Contoh Editing Foto"
                 className="w-full h-auto object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 to-transparent"></div>
@@ -112,35 +138,41 @@ function PhotoEditingPage() {
             </motion.p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {beforeAfterImages.map((img, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow"
-              >
-                <div className="relative h-64">
-                  <div className="absolute inset-0 flex">
-                    <div className="w-1/2 border-r border-white">
-                      <img src={img.before} alt="Before" className="w-full h-full object-cover" />
-                      <div className="absolute bottom-0 left-0 right-1/2 bg-black/70 text-white text-center py-1 text-sm">
-                        Before
+          {/* --- LOGIKA KONDISIONAL DIMULAI DI SINI --- */}
+          {beforeAfterImages.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {beforeAfterImages.map((img, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow"
+                >
+                  <div className="relative h-64">
+                    <div className="absolute inset-0 flex">
+                      <div className="w-1/2 border-r border-white">
+                        <img src={img.before} alt="Before" className="w-full h-full object-cover" />
+                        <div className="absolute bottom-0 left-0 right-1/2 bg-black/70 text-white text-center py-1 text-sm">
+                          Before
+                        </div>
                       </div>
-                    </div>
-                    <div className="w-1/2">
-                      <img src={img.after} alt="After" className="w-full h-full object-cover" />
-                      <div className="absolute bottom-0 right-0 left-1/2 bg-blue-600/90 text-white text-center py-1 text-sm">
-                        After
+                      <div className="w-1/2">
+                        <img src={img.after} alt="After" className="w-full h-full object-cover" />
+                        <div className="absolute bottom-0 right-0 left-1/2 bg-blue-600/90 text-white text-center py-1 text-sm">
+                          After
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                </motion.div>
+              ))}
+            </div>
+          ) : (
+            // --- Jika tidak ada gambar, tampilkan komponen ini ---
+            <ImageNotAvailable />
+          )}
         </div>
       </section>
 
@@ -191,7 +223,7 @@ function PhotoEditingPage() {
                 desc: "Kombinasi elemen kreatif untuk hasil yang unik dan menarik"
               }
             ].map((service, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
                 variants={item}
                 whileHover={{ y: -5 }}
@@ -228,7 +260,7 @@ function PhotoEditingPage() {
               className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg shadow-md transition-all duration-300"
             >
               <FaWhatsapp className="text-xl" />
-              Pesan via WhatsApp
+              Order Now!
             </a>
           </motion.div>
         </div>

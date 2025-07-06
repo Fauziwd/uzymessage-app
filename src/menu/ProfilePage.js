@@ -104,7 +104,7 @@ function ProfilePage() {
                     </button>
                 </div>
             </div>
-            <Bottom />
+            {/* <Bottom /> */}
         </div>
     );
 }

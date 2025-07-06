@@ -310,7 +310,7 @@ const Market = () => {
         </motion.div>
       )}
 
-      <Bottom />
+      {/* <Bottom /> */}
     </div>
   );
 };
