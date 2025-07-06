@@ -186,7 +186,7 @@ function HomePage() {
                 whileHover={{ scale: 1.1 }}
                 className="inline-block"
               >
-                Jasa<span className="text-[#292F36]">Plus</span>
+                Komplet<span className="text-[#20262d]">In</span>
               </motion.span>
             </Link>
             <div className="relative w-full max-w-lg mx-4">
@@ -196,7 +196,7 @@ function HomePage() {
               >
                 <input
                   type="text"
-                  placeholder="Cari jasa atau produk retro..."
+                  placeholder="Cari apa nich ..."
                   className="w-full py-2 pl-10 pr-4 bg-white border-2 border-[#292F36] rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/50"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
